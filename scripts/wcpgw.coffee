@@ -30,6 +30,6 @@ images = [
 ]
 
 module.exports = (robot) ->
-  regex = /^(wcpgw([?!.]|$)|what could possibla?y go wrong/i
+  regex = /^(wcpgw([?!.]|$)|what could possibla?y go wrong)/i
   robot.hear regex, (msg) ->
     msg.send msg.random images
