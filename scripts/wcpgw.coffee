@@ -27,6 +27,7 @@ images = [
   "http://2.bp.blogspot.com/-Eqq5rV3bouI/UlcBXb25w6I/AAAAAAAAD88/HECrbXKe8YM/s1600/Gif+5+(tumblr_m9kjpsc1WC1qk4y43o1_r14_500).gif",
   "http://stream1.gifsoup.com/view1/1500114/engineering-fail-o.gif",
   "http://www.workflowmax.com/hs-fs/hub/325051/file-1237019792-jpg/blog-attachments/tumblr_l83k83w4sI1qdsapuo1_500.jpg",
+  "http://i.giphy.com/LsjoC1YgyXtAc.gif",
 ]
 
 module.exports = (robot) ->
