@@ -8,7 +8,7 @@
 #   None
 #
 # Commands:
-#   disappointed - Vocalize your emotions.
+#   disappointed! - Vocalize your emotions.
 #
 # Author:
 #   rbroemeling
