@@ -32,6 +32,7 @@ images = [
   "http://funkplanet.com/wcpgw/forklift_fail.gif",
   "http://funkplanet.com/wcpgw/shopping_carts.gif",
   "http://funkplanet.com/wcpgw/dog_stairs.gif",
+  "http://i.imgur.com/rFmnfu2.gif",
 ]
 
 module.exports = (robot) ->
