@@ -120,7 +120,7 @@ jokes = [{
         setup: "How many apples grow on a tree?",
         punchline: "All of them"
     }, {
-        setup: "What do you call somebody with no body and no nose?",
+        setup: "What do you call somebody with no body and just a nose?",
         punchline: "Nobody knows"
     }, {
         setup: "What did the buffalo say to his son when he left for college?",
@@ -144,7 +144,7 @@ jokes = [{
         setup: "Why can't you hear a pterodactyl go to the bathroom?",
         punchline: "Because the pee is silent"
     }, {
-        setup: "I'm not addicated to brake fluid",
+        setup: "I'm not addicted to brake fluid",
         punchline: "I can stop whenever I want"
     }, {
         setup: "Why did the coffee file a police report?",
@@ -153,7 +153,7 @@ jokes = [{
         setup: "Did you hear about the restaurant on the moon?",
         punchline: "Great food, no atmosphere"
     }, {
-        setup: "I hate jokes about german sausages",
+        setup: "I hate jokes about German sausages",
         punchline: "They're the wurst"
     }, {
         setup: "Why did the can-crusher quit his job?",
