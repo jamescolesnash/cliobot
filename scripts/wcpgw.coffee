@@ -1,14 +1,8 @@
 # Description:
 #   What could possiblay go wrong?
 #
-# Dependencies:
-#   None
-#
-# Configuration:
-#   None
-#
 # Commands:
-#   wcpgw? - Display a heartwarming image
+#   hubot wcpgw? - Display a heartwarming image
 #
 # Author:
 #   fimmtiu

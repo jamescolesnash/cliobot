@@ -1,14 +1,8 @@
 # Description:
 #   #counting
 #
-# Dependencies:
-#   None
-#
-# Configuration:
-#   None
-#
 # Commands:
-#   #counting - Display a heartwarming image
+#   hubot #counting - Display a heartwarming image
 #
 # Author:
 #   fraser

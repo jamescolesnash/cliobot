@@ -1,14 +1,8 @@
 # Description:
 #   Displays the current time in Internet Time (.beats). FUCK THE SUN!
 #
-# Dependencies:
-#   None
-#
-# Configuration:
-#   None
-#
 # Commands:
-#   beat time, swatch time, internet time - Print the current time in .beats.
+#   hubot (beat|internet|swatch) time - Print the current time in .beats.
 #
 # Author:
 #   fimmtiu

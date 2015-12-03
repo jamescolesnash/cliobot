@@ -1,14 +1,8 @@
 # Description:
 #   So disappointed.
 #
-# Dependencies:
-#   None
-#
-# Configuration:
-#   None
-#
 # Commands:
-#   disappointed! - Vocalize your emotions.
+#   hubot disappointed! - Vocalize your emotions.
 #
 # Author:
 #   rbroemeling

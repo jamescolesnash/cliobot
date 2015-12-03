@@ -1,9 +1,11 @@
 # Description:
-#   Get one of the extremely corny dad jokes we have 
+#   Get one of the extremely corny dad jokes we have.
+#
 # Commands:
-#   @Cliobot dadjoke 
+#   hubot dadjoke - Channel your inner dad.
+#
 # Author:
-#    achengscode
+#   achengscode
 
 jokes = [{
         setup: "Our wedding was so beautiful,",
