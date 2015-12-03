@@ -8,7 +8,7 @@
 #   None
 #
 # Commands:
-#   wcpgw? - Display a heartwarming image
+#   #counting - Display a heartwarming image
 #
 # Author:
 #   fraser
