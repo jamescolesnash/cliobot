@@ -1,1 +1,1 @@
-web: bin/hubot -a hipchat -n cliobot
+web: bin/hubot --adapter hipchat --name cliobot
