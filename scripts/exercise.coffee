@@ -32,7 +32,7 @@ images = [ "https://media.giphy.com/media/87xihBthJ1DkA/giphy.gif",
 ]
 
 module.exports = (robot) ->
-  robot.respond /exercise|punish me/i, (msg) ->
+  robot.respond /(exercise|punish) me/i, (msg) ->
     exercise = msg.random exercises
 
     upper_limit = switch exercise
