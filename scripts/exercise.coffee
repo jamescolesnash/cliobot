@@ -25,11 +25,14 @@ images = [ "https://media.giphy.com/media/87xihBthJ1DkA/giphy.gif",
            "https://media.giphy.com/media/53RTxXl37LWYU/giphy.gif",
            "https://45.media.tumblr.com/1716e1f9f2a2fa68a8d0d61b0819b112/tumblr_nix40b3Jg71t55xupo1_500.gif",
            "https://media.giphy.com/media/2OMHmoFMiJjfq/giphy.gif",
-           "https://media3.giphy.com/media/BvsKJXGzqfNPq/200.gif"
+           "https://media3.giphy.com/media/BvsKJXGzqfNPq/200.gif",
+           "http://49.media.tumblr.com/9ba6b45df8631a3afc1128e26229b562/tumblr_nmpbp42gAF1up9ckeo1_500.gif",
+           "http://25.media.tumblr.com/aecf8a635799ab2657b5970b4bf79b4c/tumblr_mksyxu0IrV1r95jeco1_400.gif",
+           "http://24.media.tumblr.com/d35132701c13dfa7aa23e35ee5d51c52/tumblr_n5d0tlWgK81sbitb2o1_400.gif"
 ]
 
 module.exports = (robot) ->
-  robot.respond /exercise me/i, (msg) ->
+  robot.respond /exercise|punish me/i, (msg) ->
     exercise = msg.random exercises
 
     upper_limit = switch exercise
@@ -44,8 +47,8 @@ module.exports = (robot) ->
     repetitions = Math.floor Math.random() * (upper_limit - lower_limit) + lower_limit
 
     response = switch exercise 
-      when "pushups", "sit-ups", "lunges" then "give me " + repetitions + " " + exercise
-      when "plank", "wall sit" then "give me " + repetitions + " seconds of " + exercise
+      when "pushups", "sit-ups", "lunges" then "Give me #{repetitions} #{exercise}"
+      when "plank", "wall sit" then "Give me #{repetitions}  seconds of #{exercise}"
 
     msg.reply response
     msg.send msg.random images 
