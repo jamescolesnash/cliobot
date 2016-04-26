@@ -10,7 +10,7 @@
 #   wcpgw? (fimmtiu)
 emphasizers = [
   {
-    hear: /^(wcpgw([?!.]|$)|what could possibla?y go wrong)/i,
+    hear: /(^|\W)(wcpgw|what could possibl[ai]?y go wrong)(\W|$)/i,
     responses: [
       "http://funkplanet.com/wcpgw/he_man_airplane.gif",
       "http://funkplanet.com/wcpgw/explosion.gif",
