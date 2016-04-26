@@ -31,6 +31,7 @@ emphasizers = [
       "http://funkplanet.com/wcpgw/shopping_carts.gif",
       "http://funkplanet.com/wcpgw/dog_stairs.gif",
       "http://i.imgur.com/rFmnfu2.gif",
+      "http://p.fod4.com/p/media/b06153cff7/v2Q12ngeR6uHohjdAXxs_Michael%20Bay%20Baseball.gif",
     ]
   },
   {
