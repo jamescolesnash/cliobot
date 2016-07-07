@@ -51,6 +51,12 @@ emphasizers = [
       "http://www.animalfactguide.com/wp-content/uploads/2012/04/mongooselemur3-558x402.jpg",
       "http://cdn1.arkive.org/media/7B/7BAAB1F8-999F-4483-93A4-15A5620DD679/Presentation.Large/Male-and-female-mongoose-lemurs.jpg",
     ]
+  },
+  {
+    hear: /(^|\W)(roger|rgr) (roger|rgr)(\W|$)/i,
+    responses: [
+      "https://media.giphy.com/media/xT9DPr4VjeCgeiLoMo/giphy.gif"
+    ]
   }
 ]
 
