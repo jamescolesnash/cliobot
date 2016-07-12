@@ -1,5 +1,5 @@
 # Description:
-#   A way to try and grab a relevant xkcd
+#   a way to quickly generate a hangout link for people to jump into
 #
 # Configuration
 #   GOOGLE_HANGOUT_ROOT_URL - The base url for your google hangouts
@@ -90,6 +90,7 @@ animal = [
   "bear"
   "budgie"
   "cat"
+  "capybara"
   "chipmunk"
   "daschund"
   "direwolf"
