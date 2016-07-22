@@ -59,7 +59,7 @@ emphasizers = [
     ]
   },
   {
-    hear: /^y+u+p+$/i,
+    hear: /^y+u+p+[.!]*$/i,
     responses: [
       "http://s2.quickmeme.com/img/f0/f0b7609cb1bb382f12d43e048562dd94544005d1ec47af6990e08661f1c15c19.jpg",
       "https://cdn.meme.am/instances/47930163.jpg",
