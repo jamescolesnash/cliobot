@@ -6,6 +6,8 @@
 #   cliobot list calendars
 # Author:
 #   james.coles-nash
+# Original code was taken from:
+#   https://github.com/soh335/hubot-google-calendar
 
 requestWithJWT = require('google-oauth-jwt').requestWithJWT()
 moment         = require('moment-timezone')
@@ -25,7 +27,7 @@ module.exports = (robot) ->
     getCalendarEvents new Date(), null, msg.match[1], (str) ->
       msg.send str.join("\n")
 
-  request = (opt, onSuccess) ->
+  request = (opt, onSuccess, onError) ->
     params =
       jwt:
         email: process.env.HUBOT_GOOGLE_CALENDAR_EMAIL
@@ -33,15 +35,12 @@ module.exports = (robot) ->
         scopes: ['https://www.googleapis.com/auth/calendar.readonly']
     _.extend(params, opt)
 
-    robot.logger.debug(params)
-
     requestWithJWT(params, (err, res, body) ->
       if err
-        console.log err
+        onError(err)
       else
         if res.statusCode != 200
-          console.log "status code is #{res.statusCode}"
-          return
+          onError("status code is #{res.statusCode}")
         onSuccess JSON.parse(body)
     )
 
@@ -63,10 +62,12 @@ module.exports = (robot) ->
 
     strs.push event.summary
     strs.push "\n"
-    strs.push "     #{event.htmlLink}"
+    strs.push "\t#{event.htmlLink}"
     strs.join " "
 
   getCalendarList = (str) ->
+    onError = (err) ->
+      str ["Failed to load calendar list: #{err}"]
     request(
       { url: "https://www.googleapis.com/calendar/v3/users/me/calendarList" }
       (calendarListResponse) ->
@@ -74,9 +75,12 @@ module.exports = (robot) ->
         for i, calendarItem of calendarListResponse.items
           strs.push calendarItem.id
         str strs
+      onError
     )
 
   getCalendarEvents = (baseDate, startTime, calendarId, str) ->
+    onError = (err) ->
+      str ["Failed to load calendar events: #{err}"]
     request(
       { url: "https://www.googleapis.com/calendar/v3/calendars/#{calendarId}" }
       (calendarResponse) ->
@@ -102,5 +106,7 @@ module.exports = (robot) ->
             for i, eventItem of calendarEventsResponse.items
               strs.push formatEvent(eventItem)
             str strs
+          onError
         )
-      )
+      onError
+    )
