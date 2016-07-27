@@ -1,22 +1,31 @@
 # Description:
-#   google calendar for hubot
+#   google calendar for cliobot
 # Commands:
-#   hubot calendar - list up today event
-#   hubot calendar (today|tomorrow) - list up today or tomorrow event
+#   cliobot daily events {calendar id} - list up today events
+#   cliobot next event {calendar id} - list the next event
+#   cliobot list calendars
+# Author:
+#   james.coles-nash
 
 requestWithJWT = require('google-oauth-jwt').requestWithJWT()
 moment         = require('moment-timezone')
 _              = require('underscore')
 
 module.exports = (robot) ->
-  robot.respond /calendar/i, (msg) ->
-    try
-      getCalendarEvents new Date(), (str) ->
-        msg.send str
-    catch e
-      msg.send "exception: #{e}"
+  robot.respond /list calendars/i, (msg) ->
+    getCalendarList (str) ->
+      msg.send "Calendars cliobot has access to:"
+      msg.send str.join("\n")
 
-  request = (opt, onSuccess, onError) ->
+  robot.respond /daily events for (.*)/i, (msg) ->
+    getCalendarEvents new Date(), 0, msg.match[1], (str) ->
+      msg.send str.join("\n")
+
+  robot.respond /next event for (.*)/i, (msg) ->
+    getCalendarEvents new Date(), null, msg.match[1], (str) ->
+      msg.send str.join("\n")
+
+  request = (opt, onSuccess) ->
     params =
       jwt:
         email: process.env.HUBOT_GOOGLE_CALENDAR_EMAIL
@@ -28,10 +37,10 @@ module.exports = (robot) ->
 
     requestWithJWT(params, (err, res, body) ->
       if err
-        onError(err)
+        console.log err
       else
         if res.statusCode != 200
-          onError "status code is #{res.statusCode}"
+          console.log "status code is #{res.statusCode}"
           return
         onSuccess JSON.parse(body)
     )
@@ -53,44 +62,45 @@ module.exports = (robot) ->
         strs.push event.end.dateTime.match justTime
 
     strs.push event.summary
+    strs.push "\n"
+    strs.push "     #{event.htmlLink}"
     strs.join " "
 
-  getCalendarEvents = (baseDate, str) ->
+  getCalendarList = (str) ->
     request(
-      { url: 'https://www.googleapis.com/calendar/v3/users/me/calendarList' }
+      { url: "https://www.googleapis.com/calendar/v3/users/me/calendarList" }
       (calendarListResponse) ->
+        strs = []
+        for i, calendarItem of calendarListResponse.items
+          strs.push calendarItem.id
+        str strs
+    )
+
+  getCalendarEvents = (baseDate, startTime, calendarId, str) ->
+    request(
+      { url: "https://www.googleapis.com/calendar/v3/calendars/#{calendarId}" }
+      (calendarResponse) ->
         timeMin = new Date(baseDate.getTime())
-        #Show all items for the day
-        timeMin.setHours 0, 0, 0
+        timeMin.setHours startTime if startTime?
+
         timeMax = new Date(baseDate.getTime())
         timeMax.setHours 23, 59, 59
 
-        if calendarListResponse.items.length == 0
-            console.log "No calendar items found"
-
-        for i, calendarItem of calendarListResponse.items
-          request(
-            {
-              url: "https://www.googleapis.com/calendar/v3/calendars/#{calendarItem.id}/events"
-              qs:
-                timeMin: moment(timeMin).tz(calendarItem.timeZone).format()
-                timeMax: moment(timeMax).tz(calendarItem.timeZone).format()
-                orderBy: 'startTime'
-                singleEvents: true
-                timeZone: calendarItem.timeZone
-            }
-            (calendarEventsResponse) ->
-              strs = [calendarItem.id]
-              for i, eventItem of calendarEventsResponse.items
-                strs.push formatEvent(eventItem)
-                request(
-                  {
-                    url: "https://www.googleapis.com/calendar/v3/calendars/#{calendarItem.id}/events/#{eventItem.id}"
-                  }
-                  (calendarEventDetailsResponse) ->
-                    str calendarEventDetailsResponse.description
-                )
-
-              str strs.join("\n")
-          )
-    )
+        request(
+          {
+            url:
+              "https://www.googleapis.com/calendar/v3/calendars/#{calendarResponse.id}/events"
+            qs:
+              timeMin: moment(timeMin).tz(calendarResponse.timeZone).format()
+              timeMax: moment(timeMax).tz(calendarResponse.timeZone).format()
+              orderBy: 'startTime'
+              singleEvents: true
+              timeZone: calendarResponse.timeZone
+          }
+          (calendarEventsResponse) ->
+            strs = []
+            for i, eventItem of calendarEventsResponse.items
+              strs.push formatEvent(eventItem)
+            str strs
+        )
+      )
